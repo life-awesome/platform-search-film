@@ -16,13 +16,12 @@ export const Card = (props) => {
         cls.push('green')
     }
 
-
     return (
         <div className="movie">
             <Link to={`/movie/${props.filmId}`}>
                 <img src={props.imageURL} alt="preview" onClick={props.getFilmId}/>
             </Link>
-            <div className={cls.join(' ')}>{props.rating === 'null' ? '' : props.rating}</div>
+            {props.rating ? <div className={cls.join(' ')}>{props.rating === 'null' ? '' : props.rating}</div> : null}
             <div className="card d-flex justify-between align-center flex-column">
                <div> <h3>{props.name}</h3></div>
                 <div className="info">

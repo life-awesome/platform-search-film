@@ -14,7 +14,7 @@ export const DescriptionMovies = (props) => {
 
 
 
-    let filmId = useParams().filmId
+    let kinopoiskId = useParams().kinopoiskId
     const [infos, setInfo] = useState({})
     const [countries, setCountries] = useState([])
     const [genres, setGenres] = useState([])
@@ -30,7 +30,7 @@ export const DescriptionMovies = (props) => {
 
 
     useEffect(() => {
-        axios(`${API_URL_FILM}${filmId}`, {
+        axios(`${API_URL_FILM}${kinopoiskId}`, {
             headers: {
                 "Content-Type": "application/json",
                 "X-API-KEY": API_KEY,
@@ -40,19 +40,20 @@ export const DescriptionMovies = (props) => {
             setCountries(response.data.countries)
             setGenres(response.data.genres)
         })
-        axios(`${API_URL_STAFF}${filmId}`, {
+        axios(`${API_URL_STAFF}${kinopoiskId}`, {
             headers: {
                 "Content-Type": "application/json",
                 "X-API-KEY": API_KEY,
             }
         }).then(response => setActors(response.data))
-        axios(API_URL_FRAME_FILM(filmId), {
+        axios(API_URL_FRAME_FILM(kinopoiskId), {
             headers: {
                 "Content-Type": "application/json",
                 "X-API-KEY": API_KEY,
             }
         }).then(response => setFrameFilm(response.data.frames))
-    }, [filmId])
+
+    }, [kinopoiskId])
 
 
     countries.map(element => country += element.country + ', ')
@@ -73,6 +74,7 @@ export const DescriptionMovies = (props) => {
     const prevSlide = () => {
         setCurrentSlider(currentSlider === 0 ? length - 1 : currentSlider - 1)
     }
+
     return (
         <div className="description">
             <div className="avatar-movie">

@@ -1,24 +1,35 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Card} from "../Card/Card";
 import {Context} from "../Context/Context";
+import {get} from "../../request/request";
+import {API_URL_PREMIER_FILM} from "../../Сonstants/constants";
+import Loader from "../Loader/Loader";
 
 const Home = () => {
-    const {films, getFilmId} = useContext(Context)
+    const [films, setFilms] = useState([])
+    const [loading, setLoading] = useState(false);
+    const {getFilmId} = useContext(Context)
+    useEffect(()=>{
+        get(API_URL_PREMIER_FILM)
+            .then(response => {
+                setFilms(response.data.items)
+                setLoading(!loading)
+            })
+    },[])
     return (
         <div className="clear">
-            <h1 className="header-movies">Топ популярных</h1>
+            <h2 className="title">Премьеры этого месяца</h2>
             <main>
-                {films.map(element => (
+                {loading ? films.map((element,index) => (
                     <Card genres={element.genres}
-                          filmId={element.filmId}
+                          filmId={element.kinopoiskId}
                           name={element.nameRu}
                           imageURL={element.posterUrl}
-                          rating={element.rating}
                           year={element.year}
-                          key={element.filmId}
+                          key={index}
                           getFilmId={() => getFilmId(element)}
                     />
-                ))}
+                )) : <Loader/>}
             </main>
         </div>
     )
