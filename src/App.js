@@ -9,6 +9,7 @@ import Search from "./Components/Search/Search";
 import {animateScroll as scroll} from "react-scroll";
 import {AwaitFilm} from "./Components/AwaitFilm/AwaitFilm";
 import {BestFilm} from "./Components/BestFilm/BestFilm";
+import {GenrePage} from "./Components/GenrePage/GenrePage";
 
 
 function App() {
@@ -37,8 +38,8 @@ function App() {
                     <i className={showMenu ? "fas fa-bars activeBurger" : "fas fa-bars"}></i>
                 </div>
             </header>
-            <div></div>
             <Menu/>
+            <div className="up" onClick={() => scroll.scrollToTop()}><i className="fas fa-arrow-up"></i></div>
             <Routes>
                 <Route path={'/'} exact={true} element={<Home/>}/>
                 <Route path={`/movie/:kinopoiskId`} exact={true} element={<DescriptionMovies valueFilm={film}/>}/>
@@ -46,6 +47,7 @@ function App() {
                 <Route path={'/search'} exact element={<Search/>}/>
                 <Route path={'/await'} exact={true} element={<AwaitFilm/>}/>
                 <Route path={'/best-film'} exact={true} element={<BestFilm/>}/>
+                <Route path={'/genre'} exact={true} element={<GenrePage/>}/>
             </Routes>
         </Context.Provider>
     );

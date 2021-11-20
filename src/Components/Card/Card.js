@@ -15,7 +15,6 @@ export const Card = (props) => {
     } else {
         cls.push('green')
     }
-
     return (
         <div className="movie">
             <Link to={`/movie/${props.filmId}`}>

@@ -8,8 +8,9 @@ export default function Search() {
     const [films, setFilms] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [fetching, setFetching] = useState(true)
-    const {search, getFilmId} = useContext(Context)
+    const {search, getFilmId,input} = useContext(Context)
     const [totalPage, setTotalPage] = useState(0)
+    input.current.value = ''
 
     useEffect(() => {
         if (fetching) {

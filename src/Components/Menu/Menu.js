@@ -3,18 +3,18 @@ import {Context} from "../Context/Context";
 import {Link} from "react-router-dom";
 
 export const Menu = () => {
-    const {input, showMenu, hideMenu,setSearch} = useContext(Context)
+    const {input, showMenu, hideMenu, setSearch} = useContext(Context)
     return (
         <div className={showMenu ? "menu active" : "menu"}>
             <div className="blur" onClick={hideMenu}></div>
             <div className="menu-content">
                 <div className="d-flex flex-column">
                     <div className="search-block">
-                        <Link to={'/search'}>
+                        <Link to={'/search'} >
                             <img src="/images/search.svg" alt="search-img"/>
                         </Link>
                         <input type="text" placeholder="Поиск..." className="search"
-                               onChange={(e) => setSearch(input.current.value)} ref={input} />
+                               onChange={(e) => setSearch(input.current.value)} ref={input}/>
                     </div>
                     <div>
                         <Link to={'/'}>
@@ -36,6 +36,11 @@ export const Menu = () => {
                             <h4 className="menu-link" onClick={() => {
                                 hideMenu()
                             }}>Лучшие фильмы</h4>
+                        </Link>
+                        <Link to={'/genre'}>
+                            <h4 className="menu-link" onClick={() => {
+                                hideMenu()
+                            }}>Жанры</h4>
                         </Link>
                     </div>
                 </div>
