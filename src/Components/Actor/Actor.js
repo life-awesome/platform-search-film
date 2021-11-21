@@ -1,11 +1,11 @@
 import React from "react";
 
-const Actor = (props) => {
+const Actor = ({nameRu,imageURL,professionText}) => {
     return (
         <div className="actor-block">
-            <img src={props.imageURL} alt=""/>
-            <h4>{props.nameRu}</h4>
-            <p>{props.professionText.slice(0, props.professionText.length -1)}</p>
+            <img src={imageURL} alt={`${imageURL}`}/>
+            <h4>{nameRu}</h4>
+            <p>{professionText.slice(0, professionText.length -1)}</p>
         </div>
     )
 }

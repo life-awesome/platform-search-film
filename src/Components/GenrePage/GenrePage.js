@@ -15,9 +15,9 @@ export const GenrePage = () => {
     const [totalPage, setTotalPage] = useState(0)
     const [genreName, setGenreName] = useState('')
     const {getFilmId} = useContext(Context)
-    
+
     useEffect(() => {
-        if(fetching){
+        if (fetching) {
             if (state) {
                 get(API_URL_GENRE_FILM(genreId))
                     .then(response => {
@@ -25,19 +25,20 @@ export const GenrePage = () => {
                         setCurrentPage(currentPage + 1)
                         setTotalPage(response.data.pagesCount)
                     })
+                    .finally(() => setFetching(!fetching))
             } else {
                 get(API_URL_GENRE).then(response => setGenre(response.data.genres))
             }
         }
-    }, [state,fetching])
-    useEffect(()=>{
-        document.addEventListener('scroll',scrollHandler)
+    }, [state, fetching])
+    useEffect(() => {
+        document.addEventListener('scroll', scrollHandler)
         return function () {
-            document.removeEventListener('scroll',scrollHandler )
+            document.removeEventListener('scroll', scrollHandler)
         }
     })
     const scrollHandler = (e) => {
-        if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && currentPage <= totalPage){
+        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && currentPage <= totalPage) {
             setFetching(true)
         }
     }
@@ -66,11 +67,13 @@ export const GenrePage = () => {
                 </>
                 : <div className="genre-container flex-wrap">
                     {genre.map((obj, index) => {
-                        return <Genre genre={obj.genre} id={obj.id} key={index}
-                                      getIdGenre={() => getIdGenre(obj.id, obj.genre)}/>
+                        return <Genre genre={obj.genre} getIdGenre={() => {
+                            getIdGenre(obj.id, obj.genre)
+                        }
+                        }/>
                     })}
-                </div>}
-
+                </div>
+            }
         </div>
     )
 }

@@ -293,7 +293,8 @@ main {
 }
 
 .actor-block img {
-    height: 220px;
+    width: 170px;
+    height: 230px;
     border-radius: 5px;
 }
 

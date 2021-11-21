@@ -21,7 +21,7 @@ export const DescriptionMovies = (props) => {
     const [actors, setActors] = useState([])
     const [frameFilm, setFrameFilm] = useState([])
     const [currentSlider, setCurrentSlider] = useState(0)
-
+    console.log(actors)
 
     const length = frameFilm.length
     let country = ''
@@ -61,8 +61,8 @@ export const DescriptionMovies = (props) => {
 
 
     if (actors.length >= 1) {
-        for (let i = 0; i <= 5; i++) {
-            actor.push(<Actor key={i} imageURL={actors[i].posterUrl} nameRu={actors[i].nameRu}
+        for (let i = 0; i <= 4; i++) {
+            actor.push(<Actor key={i} imageURL={ actors[i].posterUrl === undefined ? '/images/error.png' : actors[i].posterUrl } nameRu={actors[i].nameRu}
                               professionText={actors[i].professionText}/>)
         }
     }
